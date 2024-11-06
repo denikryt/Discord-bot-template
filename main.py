@@ -9,8 +9,8 @@ env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path)
 
 # Retrieve the bot token and channel ID from environment variables
-DOOR_BOT_TOKEN = os.environ.get('DOOR_BOT_TOKEN')
-DISCORD_CHANNEL_ID_DOOR_EVENTS = os.environ.get('DISCORD_CHANNEL_ID_DOOR_EVENTS')
+DISCORD_TOKEN = os.environ.get('DISCORD_TOKEN')
+DISCORD_CHANNEL_ID = os.environ.get('DISCORD_CHANNEL_ID')
 
 # Discord Bot Configuration
 intents = Intents.default()
@@ -20,7 +20,7 @@ discord_client = Client(intents=intents)
 # Function to send a message to the specified Discord channel
 async def send_new_message_to_discord():
     text = 'hello'  # The message to send
-    discord_channel = discord_client.get_channel(int(DISCORD_CHANNEL_ID_DOOR_EVENTS))
+    discord_channel = discord_client.get_channel(int(DISCORD_CHANNEL_ID))
 
     if discord_channel:
         await discord_channel.send(text)
@@ -33,4 +33,4 @@ async def on_ready():
     await send_new_message_to_discord()  # Send the message when the bot is ready
 
 # Run the bot
-discord_client.run(DOOR_BOT_TOKEN)
+discord_client.run(DISCORD_TOKEN)
